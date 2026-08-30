@@ -1,5 +1,14 @@
 print("Veterinary Patient Calculator")
 print("------------------------------")
+
+def get_valid_number(prompt):
+    while True:
+        try:
+            value=float(input(prompt))
+            return value
+        except ValueError:
+            print("Please enter a valid number")
+
 def assess_temperature(temperature):
     if temperature>39.5:
         return "Above expected range"
@@ -7,21 +16,34 @@ def assess_temperature(temperature):
         return "Below expected range"
     else:
         return "Within Expected change"
-def assess_heart_rate(heart_rate):
-    if heart_rate>180:
-        return "Above expected range"
-    elif heart_rate<70:
-        return "Below expected range"
-    else:
-        return "Within Expected change"
+    
+def assess_heart_rate(heart_rate,species):
+    if species=="Dog":
+        if heart_rate>120:
+            return "Above expected range"
+        elif heart_rate<70:
+            return "Below expected range"
+        else:
+            return "Within Expected range"
+    if species=="Cat":
+        if heart_rate>140:
+            return "Above expected range"
+        elif heart_rate<120:
+            return "Below expected range"
+        else:
+            return "Within Expected range"
+        
 name= input("Enter animal name:")
 species=input("Enter species(Dog/Cat):")
-age=float(input("Enter age in years:"))
-weight=float(input("Enter weight in kg:"))
-temperature=float(input("Enter body temperature in C:"))
+
+age=get_valid_number("Enter age in years:")
+        
+
+weight=get_valid_number("Enter weight in kg:")
+temperature=get_valid_number("Enter body temperature in C:")
 temperature_status=assess_temperature(temperature)
-heart_rate=float(input("Enter heart rate:"))
-heart_rate_status=assess_heart_rate(heart_rate)
+heart_rate=get_valid_number("Enter heart rate:")
+heart_rate_status=assess_heart_rate(heart_rate,species)
 print()
 print("Patient Information")
 print("---------------------")
